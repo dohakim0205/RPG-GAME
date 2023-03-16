@@ -3,7 +3,7 @@ package RPG_GAME;
 import java.util.ArrayList;
 
 public class Inventory {
-	ArrayList<Item> itemList = new ArrayList<>();
+	private ArrayList<Item> itemList = new ArrayList<>();
 
 	public void inventoryMenu() {
 		while (true) {
@@ -22,12 +22,12 @@ public class Inventory {
 	}
 
 	public void equipMenu() {
-		Player.guild.printAllUnitStaus();
+		Player.getGuild().printAllUnitStaus();
 		System.out.println("아이템 착용할 길드원을 선택하세요 ");
 		int selUnit = MainGame.scan.nextInt();
 		while (true) {
-			Player.guild.printUnitStaus(selUnit - 1);
-			Player.guild.printUnitItem(selUnit - 1);
+			Player.getGuild().printUnitStaus(selUnit - 1);
+			Player.getGuild().printUnitItem(selUnit - 1);
 			printItemList();
 			System.out.println("착용할 아이템 번호를 입력하세요 [0.뒤로가기]");
 			int selEquip = MainGame.scan.nextInt();
@@ -68,7 +68,7 @@ public class Inventory {
 	public void sellMenu() {
 		while (true) {
 			printItemList();
-			System.out.println("[골드 : " + Player.money + "]");
+			System.out.println("[골드 : " + Player.getMoney() + "]");
 			System.out.println("판매할 아이템 번호를 입력하세요. (50 % 세금) [0.뒤로가기]");
 			int selSell = MainGame.scan.nextInt();
 			System.out.println(itemList.get(selSell - 1).name + "을 판매합니다.");
@@ -77,9 +77,23 @@ public class Inventory {
 			} catch (InterruptedException e) {
 				e.printStackTrace();
 			}
-			Player.money += (itemList.get(selSell - 1).price / 2);
+			
+			int money = Player.getMoney() + (itemList.get(selSell - 1).price / 2); 
+			Player.setMoney(money);
 			itemList.remove(selSell - 1);
 		}
+	}
+	
+	public int getItemListSize() {
+		return this.itemList.size();
+	}
+	
+	public ArrayList<Item> getItemList() {
+		return this.itemList;
+	}
+
+	public void setItemList(ArrayList<Item> itemList) {
+		this.itemList = itemList;
 	}
 
 	public void addItem(Item item) {

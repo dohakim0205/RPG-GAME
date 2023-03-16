@@ -15,11 +15,11 @@ public class FileData {
 		fout = new FileWriter(path);
 		ArrayList<Unit> temp = Player.getGuildList();
 		String gameData = "";
-		gameData += Player.money;
+		gameData += Player.getMoney();
 		gameData += "\r\n";
 		gameData += temp.size();
 		gameData += "\r\n";
-		// Unit temp = new Unit("호랑이", 1, 100, 10, 5, 0);
+
 		for (int i = 0; i < temp.size(); i++) {
 			gameData += temp.get(i).name;
 			gameData += "/";
@@ -113,12 +113,11 @@ public class FileData {
 			reader = new FileReader(path);
 			br = new BufferedReader(reader);
 			String money = br.readLine();
-			Player.money = Integer.parseInt(money);
-			System.out.println(Player.money);
+			Player.setMoney(Integer.parseInt(money));
 			String guildSize = br.readLine();
 			int size = Integer.parseInt(guildSize);
-			Player.guild.guildList.clear();
-			System.out.println(size);
+			ArrayList<Unit> list = new ArrayList<>();
+			Player.setGuildList(list);
 			for (int i = 0; i < size; i++) {
 				String unitData = br.readLine();
 				String[] unitArr = unitData.split("/");
@@ -130,7 +129,7 @@ public class FileData {
 				int exp = Integer.parseInt(unitArr[5]);
 				boolean party = Boolean.parseBoolean(unitArr[6]);
 				Unit temp = new Unit(name, level, maxhp, att, def, exp, party);
-				Player.guild.guildList.add(temp);
+				Player.addUnitToGuildList(temp);
 				// ==================== item =======================
 				String itemData = br.readLine();
 				String itemArr[] = itemData.split("/");
@@ -176,8 +175,9 @@ public class FileData {
 			String invenSize = br.readLine();
 			System.out.println(invenSize);
 			int inSize = Integer.parseInt(invenSize);
-
-			Player.inven.itemList.clear();
+			
+			Inventory inventory = new Inventory();
+			Player.setInven(inventory);
 			for (int i = 0; i < inSize; i++) {
 				String invenDate = br.readLine();
 				String[] invenArr = invenDate.split("/");
@@ -187,7 +187,7 @@ public class FileData {
 				int itemPrice = Integer.parseInt(invenArr[3]);
 				Item item = new Item();
 				item.setItem(itemKind, itemName, itemPower, itemPrice);
-				Player.inven.itemList.add(item);
+				Player.addItemToItemList(item);
 			}
 
 		}

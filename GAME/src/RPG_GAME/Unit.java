@@ -12,82 +12,99 @@ public class Unit {
 	Item weapon;
 	Item armor;
 	Item ring;
+	Item hat;
+	Item shoes;
 
 	public Unit(String n, int l, int h, int a, int d, int e) {
-		name = n;
-		level = l;
-		maxHp = h;
-		att = a;
-		def = d;
-		exp = e;
-		hp = maxHp;
-		party = false;
-		weapon = null;
-		armor = null;
-		ring = null;
+		this.name = n;
+		this.level = l;
+		this.maxHp = h;
+		this.att = a;
+		this.def = d;
+		this.exp = e;
+		this.hp = maxHp;
+		this.party = false;
+		this.weapon = null;
+		this.armor = null;
+		this.ring = null;
+		this.hat = null;
+		this.shoes = null;
 	}
 
 	public Unit(String n, int l, int h, int a, int d, int e, boolean p) {
-		name = n;
-		level = l;
-		maxHp = h;
-		att = a;
-		def = d;
-		exp = e;
-		hp = maxHp;
-		party = p;
-		weapon = null;
-		armor = null;
-		ring = null;
+		this.name = n;
+		this.level = l;
+		this.maxHp = h;
+		this.att = a;
+		this.def = d;
+		this.exp = e;
+		this.hp = maxHp;
+		this.party = p;
+		this.weapon = null;
+		this.armor = null;
+		this.ring = null;
 	}
 
-	public void setItem(Item w, Item a, Item r) {
-		weapon = w;
-		armor = a;
-		ring = r;
+	public void setItem(Item w, Item a, Item r, Item h, Item s) {
+		this.weapon = w;
+		this.armor = a;
+		this.ring = r;
+		this.hat = h;
+		this.shoes = s;
 	}
 
 	public void printStatus() {
-		System.out.print("[이름 : " + name + "]");
-		System.out.print(" [레벨 : " + level + "]");
-		if (ring != null) {
-			System.out.print(" [체력 : " + hp + " + " + ring.power);
+		System.out.print("[이름 : " + this.name + "]");
+		System.out.print(" [레벨 : " + this.level + "]");
+		if (this.ring != null) {
+			System.out.print(" [체력 : " + this.hp + " + " + this.ring.power);
 		} else {
-			System.out.print(" [체력 : " + hp);
+			System.out.print(" [체력 : " + this.hp);
 		}
-		if (ring != null) {
-			System.out.println(" / " + maxHp + " + " + ring.power + "]");
+		if (this.ring != null) {
+			System.out.println(" / " + this.maxHp + " + " + this.ring.power + "]");
 		} else {
-			System.out.println(" / " + maxHp + "]");
+			System.out.println(" / " + this.maxHp + "]");
 		}
-		if (weapon != null) {
-			System.out.print("[공격력 : " + att + " + " + weapon.power + "]");
+		if (this.weapon != null) {
+			System.out.print("[공격력 : " + this.att + " + " + this.weapon.power + "]");
 		} else {
-			System.out.print("[공격력 : " + att + "]");
+			System.out.print("[공격력 : " + this.att + "]");
 		}
-		if (armor != null) {
-			System.out.print(" [방어력 : " + def + " + " + armor.power + "]");
+		if (this.armor != null) {
+			System.out.print(" [방어력 : " + this.def + " + " + this.armor.power + "]");
 		} else {
-			System.out.print(" [방어력 : " + def + "]");
+			System.out.print(" [방어력 : " + this.def + "]");
 		}
-		System.out.println(" [파티중 : " + party + "]");
+		System.out.println(" [파티중 : " + this.party + "]");
 	}
 
 	public void printEquitedItem() {
-		if (weapon == null) {
+		if (this.weapon == null) {
 			System.out.println("[무기 : 없음 ]");
 		} else {
-			System.out.println("[무기 : " + weapon.name + "]");
+			System.out.println("[무기 : " + this.weapon.name + "]");
 		}
-		if (armor == null) {
+		if (this.armor == null) {
 			System.out.println("[방어구 : 없음 ]");
 		} else {
-			System.out.println("[방어구 : " + armor.name + "]");
+			System.out.println("[방어구 : " + this.armor.name + "]");
 		}
-		if (ring == null) {
+		if (this.ring == null) {
 			System.out.println("[반지 : 없음 ]");
 		} else {
-			System.out.println("[반지 : " + ring.name + "]");
+			System.out.println("[반지 : " + this.ring.name + "]");
 		}
+		if (this.hat == null) {
+			System.out.println("[모자 : 없음 ]");
+		} else {
+			System.out.println("[모자 : " + this.hat.name + "]");
+		}
+		if (this.shoes == null) {
+			System.out.println("[신발 : 없음 ]");
+		} else {
+			System.out.println("[신발 : " + this.shoes.name + "]");
+		}
+		
 	}
 }
