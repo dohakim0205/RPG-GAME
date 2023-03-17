@@ -112,7 +112,41 @@ public class Guild {
 	}
 
 	public Unit getGuildUnit(int num) {
-		return this.guildList.get(num);
+		Unit temp = this.guildList.get(num);
+		String name = temp.getName();
+		int level = temp.getLevel();
+		int hp = temp.getHp();
+		int maxHp = temp.getMaxHp();
+		int att = temp.getAtt();
+		int def = temp.getDef();
+		int exp = temp.getExp();
+		boolean party = temp.isParty();
+		Item weapon = temp.getWeapon();
+		Item armor = temp.getArmor();
+		Item ring = temp.getRing();
+		Item hat = temp.getHat();
+		Item shoes = temp.getShoes();
+
+		Unit reqObj = new Unit(name, level, maxHp, att, def, exp, party);
+		reqObj.setHp(hp);
+		reqObj.setItem(weapon, armor, ring, hat, shoes);
+		return reqObj;
+	}
+	
+	public void setGuildUnitEquip(Unit unit, Item item) {
+		int index = indexOfUnit(unit);
+		this.guildList.get(index).setEquip(item);
+	}
+	
+	private int indexOfUnit(Unit unit) {
+		int index = -1;
+		for(Unit temp : this.guildList) {
+			if(temp.getName().equals(unit.getName())) {
+				index = this.guildList.indexOf(temp);
+			}
+		}
+		
+		return index;
 	}
 
 	public void printAllUnitStaus() {
@@ -155,11 +189,11 @@ public class Guild {
 		System.out.println("[유닛 추가 : 5000골드]");
 		System.out.println("추가 하시겠습니까? 1) 네 2) 아니오");
 		int yes = MainGame.scan.nextInt();
-		
-		if(yes != 1) {
+
+		if (yes != 1) {
 			return;
 		}
-		
+
 		if (Player.getMoney() < 5000)
 			return;
 
@@ -198,11 +232,11 @@ public class Guild {
 	}
 
 	public void removeUnit() {
-		if(this.getGuildListSize() == 0) {
+		if (this.getGuildListSize() == 0) {
 			System.out.println("삭제할 수 있는 길드원이 없습니다");
 			return;
 		}
-		
+
 		printAllUnitStaus();
 		System.out.println("삭제할 번호를 입력하세요 ");
 		int sel = MainGame.scan.nextInt();
@@ -334,7 +368,7 @@ public class Guild {
 			this.guildList.set(i, unit);
 			this.guildList.set(index, standardUnit);
 		}
-		
+
 		printAllUnitStaus();
 		System.out.println("정렬 되었습니다");
 	}
@@ -381,7 +415,7 @@ public class Guild {
 		System.out.println("파티원을 등록합니다.");
 		System.out.println("=================================");
 		addUnitToPartyList(unit);
-		
+
 		try {
 			Thread.sleep(1000);
 		} catch (InterruptedException e) {

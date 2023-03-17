@@ -119,6 +119,7 @@ public class Shop {
 			int selKind = MainGame.scan.nextInt();
 			if (selKind == 0)
 				return;
+
 			while (true) {
 				if (selKind == Item.WEAPON)
 					System.out.println("=========== [무기] ============");
@@ -128,39 +129,50 @@ public class Shop {
 					System.out.println("=========== [반지] ============");
 				else if (selKind == Item.HAT)
 					System.out.println("=========== [모자] ============");
-				else if (selKind == Item.HAT)
+				else if (selKind == Item.SHOES)
 					System.out.println("=========== [신발] ============");
 				printItems(selKind);
 				System.out.println("[골드 : " + Player.getMoney() + "]");
 				System.out.println("구입할 아이템 번호를 입력하세요 [0.뒤로가기]");
-				int selNum = MainGame.scan.nextInt();
+				int selNum = MainGame.inputNumber();
 				if (selNum == 0)
 					break;
-				int count = 0;
-				for (int i = 0; i < this.itemList.size(); i++) {
-					if (this.itemList.get(i).getKind() == selKind) {
-						count++;
-						if (count == selNum) {
-							if (Player.getMoney() >= this.itemList.get(i).getPrice()) {
-								Inventory invenTemp = Player.getInven();
-								invenTemp.addItem(this.itemList.get(i));
-								Player.setInven(invenTemp);
-								int moneyTemp = Player.getMoney() - this.itemList.get(i).getPrice();
-								Player.setMoney(moneyTemp);
-								System.out.println("[" + this.itemList.get(i).getName() + "] 을 구입했습니다.");
-								try {
-									Thread.sleep(1000);
-								} catch (InterruptedException e) {
-									e.printStackTrace();
-								}
-							} else {
-								System.out.println("보유하고 있는 금액이 부족합니다");
-							}
-							break;
-						}
-					}
+
+				buyItem(selKind, selNum);
+			}
+		}
+	}
+
+	private void buyItem(int selKind, int selNum) {
+		int count = 0;
+		int index = -1;
+		for (int i = 0; i < this.itemList.size(); i++) {
+			if (this.itemList.get(i).getKind() == selKind) {
+				count++;
+				if (count == selNum) {
+					index = i;
+					break;
 				}
 			}
+		}
+		if (index == -1) {
+			System.out.println("존재하지 않는 아이템 번호입니다");
+			return;
+		}
+
+		if (Player.getMoney() < this.itemList.get(index).getPrice()) {
+			System.out.println("보유하고 있는 금액이 부족합니다");
+			return;
+		}
+
+		Player.inven.addItem(this.itemList.get(index));
+		int moneyTemp = Player.getMoney() - this.itemList.get(index).getPrice();
+		Player.setMoney(moneyTemp);
+		System.out.println("[" + this.itemList.get(index).getName() + "] 을 구입했습니다.");
+		try {
+			Thread.sleep(1000);
+		} catch (InterruptedException e) {
+			e.printStackTrace();
 		}
 	}
 

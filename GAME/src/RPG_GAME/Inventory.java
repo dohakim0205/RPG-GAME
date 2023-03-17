@@ -22,65 +22,54 @@ public class Inventory {
 	}
 
 	public void equipMenu() {
-		Player.getGuild().printAllUnitStaus();
+		Player.guild.printAllUnitStaus();
 		System.out.println("아이템 착용할 길드원을 선택하세요 ");
-		int selUnit = MainGame.scan.nextInt();
+		int selUnit = MainGame.inputNumber() - 1;
+		if (selUnit < 0 || selUnit >= Player.guild.getGuildListSize()) {
+			System.out.println("존재하지 않는 길드원 번호입니다");
+			return;
+		}
+
 		while (true) {
-			Player.getGuild().printUnitStaus(selUnit - 1);
-			Player.getGuild().printUnitItem(selUnit - 1);
+			Player.guild.printUnitStaus(selUnit);
+			Player.guild.printUnitItem(selUnit);
 			printItemList();
 			System.out.println("착용할 아이템 번호를 입력하세요 [0.뒤로가기]");
 			int selEquip = MainGame.scan.nextInt();
 			if (selEquip == 0)
 				break;
 			selEquip--;
-			
-			Item[] unitItem = new Item [getItemListSize()];
-			Unit unit = Player.getGuildUnit(selUnit - 1);
-			unitItem[0] = unit.getWeapon();
-			unitItem[1] = unit.getArmor();
-			unitItem[2] = unit.getRing();
-			unitItem[3] = unit.getHat();
-			unitItem[4] = unit.getShoes();
-			
-			for(int i = 0; i < unitItem.length; i ++) {
-				for(int j = Item.WEAPON; j <= Item.SHOES; j ++) {
-					int kind = this.itemList.get(selEquip).getKind();
-					if(kind == j) {
-						if (unitItem[i] != null) {
-							this.itemList.add(unitItem[i]);
-						}
-						
-						unit.setWeapon(this.itemList.get(selEquip));
-					}
-				}
+
+			if (selEquip < 0 || selEquip >= this.itemList.size()) {
+				System.out.println("존재하지 않는 번호입니다");
+				continue;
 			}
-			
-			if (this.itemList.get(selEquip).getKind() == Item.WEAPON) {
-				
-			} else if (this.itemList.get(selEquip).getKind() == Item.ARMOR) {
-				if (Player.getGuildUnit(selUnit - 1).getArmor() != null) {
-					this.itemList.add(Player.getGuildUnit(selUnit - 1).getArmor());
-				}
-				Player.getGuildUnit(selUnit - 1).setArmor(this.itemList.get(selEquip));
-			} else if (this.itemList.get(selEquip).getKind() == Item.RING) {
-				if (Player.getGuildUnit(selUnit - 1).getRing() != null) {
-					this.itemList.add(Player.getGuildUnit(selUnit - 1).getRing());
-				}
-				Player.getGuildUnit(selUnit - 1).setRing(this.itemList.get(selEquip));
-			} else if (this.itemList.get(selEquip).getKind() == Item.HAT) {
-				if (Player.getGuildUnit(selUnit - 1).getHat() != null) {
-					this.itemList.add(Player.getGuildUnit(selUnit - 1).getHat());
-				}
-				Player.getGuildUnit(selUnit - 1).setHat(this.itemList.get(selEquip));
-			} else if (this.itemList.get(selEquip).getKind() == Item.SHOES) {
-				if (Player.getGuildUnit(selUnit - 1).getShoes() != null) {
-					this.itemList.add(Player.getGuildUnit(selUnit - 1).getShoes());
-				}
-				Player.getGuildUnit(selUnit - 1).setShoes(this.itemList.get(selEquip));
-			}
-			this.itemList.remove(selEquip);
+
+			setUnitEquip(selUnit, selEquip);
 		}
+	}
+
+	private void setUnitEquip(int selUnit, int selEquip) {
+		Item[] unitItem = new Item[5];
+		Unit unit = Player.getGuildUnit(selUnit);
+		unitItem[0] = unit.getWeapon();
+		unitItem[1] = unit.getArmor();
+		unitItem[2] = unit.getRing();
+		unitItem[3] = unit.getHat();
+		unitItem[4] = unit.getShoes();
+
+		for (int i = Item.WEAPON ; i <= Item.SHOES; i++) {
+			Item selItem = this.itemList.get(selEquip);
+			if (selItem.getKind() == i) {
+				if (unitItem[i-1] != null) {
+					this.itemList.add(unitItem[i-1]);
+					System.out.println(unitItem[i-1].getName());
+				}
+				Player.guild.setGuildUnitEquip(unit, selItem);
+				System.out.println(selItem.getName());
+			}
+		}
+		this.itemList.remove(selEquip);
 	}
 
 	public void printItemList() {
@@ -119,14 +108,12 @@ public class Inventory {
 		this.itemList.remove(selNum);
 		System.out.println("[골드 잔액 : " + Player.getMoney() + "]");
 		System.out.println("=================================");
-		
+
 		try {
 			Thread.sleep(1000);
 		} catch (InterruptedException e) {
 			e.printStackTrace();
 		}
-
-		
 	}
 
 	public int getItemListSize() {
@@ -144,5 +131,4 @@ public class Inventory {
 	public void addItem(Item item) {
 		this.itemList.add(item);
 	}
-
 }

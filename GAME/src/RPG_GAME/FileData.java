@@ -177,7 +177,7 @@ public class FileData {
 			int inSize = Integer.parseInt(invenSize);
 
 			Inventory inventory = new Inventory();
-			Player.setInven(inventory);
+			Player.inven = inventory;
 			for (int i = 0; i < inSize; i++) {
 				String invenDate = br.readLine();
 				String[] invenArr = invenDate.split("/");

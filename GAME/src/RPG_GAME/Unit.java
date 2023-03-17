@@ -148,9 +148,9 @@ public class Unit {
 	public void setShoes(Item shoes) {
 		this.shoes = shoes;
 	}
-	
+
 	public void setEquipByIndex(int index) {
-		
+
 	}
 
 	public void setItem(Item w, Item a, Item r, Item h, Item s) {
@@ -164,65 +164,58 @@ public class Unit {
 	public void printStatus() {
 		System.out.print("[이름 : " + this.getName() + "]");
 		System.out.print(" [레벨 : " + this.level + "]");
-		if (this.ring != null) {
-			System.out.print(" [체력 : " + this.hp + " + " + this.ring.getPower());
-		} else {
-			System.out.print(" [체력 : " + this.hp);
+		System.out.print(" [체력 : " + this.hp + isItemNullForPower(this.ring));
+		System.out.println(" / " + this.maxHp + isItemNullForPower(this.ring) + "]");
+		System.out.print("[공격력 : " + this.att + isItemNullForPower(this.weapon) + isItemNullForPower(this.hat) + "]");
+		System.out.print(" [방어력 : " + this.def + isItemNullForPower(this.armor) + isItemNullForPower(this.shoes) + "]");
+		System.out.printf(" [파티중 : %s]\n", this.party ? "O" : "X");
+	}
+
+	private String isItemNullForPower(Item item) {
+		String power = "";
+		if (item != null) {
+			power += " + " + item.getPower();
 		}
-		if (this.ring != null) {
-			System.out.println(" / " + this.maxHp + " + " + this.ring.getPower() + "]");
-		} else {
-			System.out.println(" / " + this.maxHp + "]");
+
+		return power;
+	}
+
+	private String isItemNullForName(Item item) {
+		String name = "없음";
+		if (item != null) {
+			name = item.getName();
 		}
-		if (this.weapon != null) {
-			System.out.print("[공격력 : " + this.att + " + " + this.weapon.getPower() + "]");
-		} else {
-			System.out.print("[공격력 : " + this.att + "]");
-		}
-		if (this.armor != null) {
-			System.out.print(" [방어력 : " + this.def + " + " + this.armor.getPower() + "]");
-		} else {
-			System.out.print(" [방어력 : " + this.def + "]");
-		}
-		if (this.hat != null) {
-			System.out.print("[공격력 : " + this.att + " + " + this.hat.getPower() + "]");
-		} else {
-			System.out.print("[공격력 : " + this.att + "]");
-		}
-		if (this.shoes != null) {
-			System.out.print(" [방어력 : " + this.def + " + " + this.shoes.getPower() + "]");
-		} else {
-			System.out.print(" [방어력 : " + this.def + "]");
-		}
-		System.out.printf(" [파티중 : %s]", this.party ? "O" : "X");
+
+		return name;
 	}
 
 	public void printEquitedItem() {
-		if (this.weapon == null) {
-			System.out.println("[무기 : 없음 ]");
-		} else {
-			System.out.println("[무기 : " + this.weapon.getName() + "]");
-		}
-		if (this.armor == null) {
-			System.out.println("[방어구 : 없음 ]");
-		} else {
-			System.out.println("[방어구 : " + this.armor.getName() + "]");
-		}
-		if (this.ring == null) {
-			System.out.println("[반지 : 없음 ]");
-		} else {
-			System.out.println("[반지 : " + this.ring.getName() + "]");
-		}
-		if (this.hat == null) {
-			System.out.println("[모자 : 없음 ]");
-		} else {
-			System.out.println("[모자 : " + this.hat.getName() + "]");
-		}
-		if (this.shoes == null) {
-			System.out.println("[신발 : 없음 ]");
-		} else {
-			System.out.println("[신발 : " + this.shoes.getName() + "]");
+		System.out.println("[무기 : " + isItemNullForName(this.weapon) + "]");
+		System.out.println("[방어구 : " + isItemNullForName(this.armor) + "]");
+		System.out.println("[반지 : " + isItemNullForName(this.ring) + "]");
+		System.out.println("[모자 : " + isItemNullForName(this.hat) + "]");
+		System.out.println("[신발 : " + isItemNullForName(this.shoes) + "]");
+	}
+
+	public void setEquip(Item item) {
+		if (item.getKind() == Item.WEAPON) {
+			setWeapon(item);
 		}
 
+		else if (item.getKind() == Item.ARMOR) {
+			setArmor(item);
+		}
+
+		else if (item.getKind() == Item.RING) {
+			setRing(item);
+		}
+
+		else if (item.getKind() == Item.HAT) {
+			setHat(item);
+		}
+
+		else if (item.getKind() == Item.SHOES) {
+			setShoes(item);
+		}
 	}
 }
