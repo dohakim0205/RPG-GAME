@@ -3,113 +3,113 @@ package RPG_GAME;
 import java.util.ArrayList;
 
 public class Shop {
-	private static ArrayList<Item> itemList = new ArrayList<>();
+	private ArrayList<Item> itemList = new ArrayList<>();
 
 	public Shop() {
-		Item temp = new Item();
-		temp.kind = Item.WEAPON;
-		temp.name = "언데드소울다이아케인";
-		temp.power = 3;
-		temp.price = 1000;
-		itemList.add(temp);
+		int kind = Item.WEAPON;
+		String name = "언데드소울다이아케인";
+		int power = 3;
+		int price = 1000;
+		Item temp = new Item(kind, name, power, price);
+		this.itemList.add(temp);
 
-		temp = new Item();
-		temp.kind = Item.WEAPON;
-		temp.name = "화투패";
-		temp.power = 5;
-		temp.price = 2000;
-		itemList.add(temp);
+		kind = Item.WEAPON;
+		name = "화투패";
+		power = 5;
+		price = 2000;
+		temp = new Item(kind, name, power, price);
+		this.itemList.add(temp);
 
-		temp = new Item();
-		temp.kind = Item.WEAPON;
-		temp.name = "고양이발";
-		temp.power = 7;
-		temp.price = 2500;
-		itemList.add(temp);
+		kind = Item.WEAPON;
+		name = "고양이발";
+		power = 7;
+		price = 2500;
+		temp = new Item(kind, name, power, price);
+		this.itemList.add(temp);
 
-		temp = new Item();
-		temp.kind = Item.ARMOR;
-		temp.name = "언데드소울다이아셔츠";
-		temp.power = 1;
-		temp.price = 300;
-		itemList.add(temp);
+		kind = Item.ARMOR;
+		name = "언데드소울다이아셔츠";
+		power = 1;
+		price = 300;
+		temp = new Item(kind, name, power, price);
+		this.itemList.add(temp);
 
-		temp = new Item();
-		temp.kind = Item.ARMOR;
-		temp.name = "거적떼기";
-		temp.power = 4;
-		temp.price = 800;
-		itemList.add(temp);
+		kind = Item.ARMOR;
+		name = "거적떼기";
+		power = 4;
+		price = 800;
+		temp = new Item(kind, name, power, price);
+		this.itemList.add(temp);
 
-		temp = new Item();
-		temp.kind = Item.ARMOR;
-		temp.name = "고양이잠옷";
-		temp.power = 7;
-		temp.price = 1500;
-		itemList.add(temp);
+		kind = Item.ARMOR;
+		name = "고양이잠옷";
+		power = 7;
+		price = 1500;
+		temp = new Item(kind, name, power, price);
+		this.itemList.add(temp);
 
-		temp = new Item();
-		temp.kind = Item.RING;
-		temp.name = "언데드소울다이아링";
-		temp.power = 7;
-		temp.price = 3000;
-		itemList.add(temp);
+		kind = Item.RING;
+		name = "언데드소울다이아링";
+		power = 7;
+		price = 3000;
+		temp = new Item(kind, name, power, price);
+		this.itemList.add(temp);
 
-		temp = new Item();
-		temp.kind = Item.RING;
-		temp.name = "금반지";
-		temp.power = 17;
-		temp.price = 6000;
-		itemList.add(temp);
+		kind = Item.RING;
+		name = "금반지";
+		power = 17;
+		price = 6000;
+		temp = new Item(kind, name, power, price);
+		this.itemList.add(temp);
 
-		temp = new Item();
-		temp.kind = Item.RING;
-		temp.name = "고양이방울반지";
-		temp.power = 35;
-		temp.price = 20000;
-		itemList.add(temp);
+		kind = Item.RING;
+		name = "고양이방울반지";
+		power = 35;
+		price = 20000;
+		temp = new Item(kind, name, power, price);
+		this.itemList.add(temp);
 
-		temp = new Item();
-		temp.kind = Item.HAT;
-		temp.name = "언데드소울다이아헬멧";
-		temp.power = 5;
-		temp.price = 2000;
-		itemList.add(temp);
+		kind = Item.HAT;
+		name = "언데드소울다이아헬멧";
+		power = 5;
+		price = 2000;
+		temp = new Item(kind, name, power, price);
+		this.itemList.add(temp);
 
-		temp = new Item();
-		temp.kind = Item.HAT;
-		temp.name = "중절모";
-		temp.power = 15;
-		temp.price = 2000;
-		itemList.add(temp);
+		kind = Item.HAT;
+		name = "중절모";
+		power = 15;
+		price = 2000;
+		temp = new Item(kind, name, power, price);
+		this.itemList.add(temp);
 
-		temp = new Item();
-		temp.kind = Item.HAT;
-		temp.name = "고양이귀";
-		temp.power = 85;
-		temp.price = 100000;
-		itemList.add(temp);
+		kind = Item.HAT;
+		name = "고양이귀";
+		power = 85;
+		price = 100000;
+		temp = new Item(kind, name, power, price);
+		this.itemList.add(temp);
 
-		temp = new Item();
-		temp.kind = Item.SHOES;
-		temp.name = "언데드소울다이아슈즈";
-		temp.power = 6;
-		temp.price = 3500;
-		itemList.add(temp);
+		kind = Item.SHOES;
+		name = "언데드소울다이아슈즈";
+		power = 6;
+		price = 3500;
+		temp = new Item(kind, name, power, price);
+		this.itemList.add(temp);
 
-		temp = new Item();
-		temp.kind = Item.SHOES;
-		temp.name = "고무신";
-		temp.power = 19;
-		temp.price = 10000;
-		itemList.add(temp);
+		kind = Item.SHOES;
+		name = "고무신";
+		power = 19;
+		price = 10000;
+		temp = new Item(kind, name, power, price);
+		this.itemList.add(temp);
 
-		temp = new Item();
-		temp.kind = Item.SHOES;
-		temp.name = "고양이발바닥";
-		temp.power = 35;
-		temp.price = 15000;
-		itemList.add(temp);
+		kind = Item.SHOES;
+		name = "고양이발바닥";
+		power = 35;
+		price = 15000;
+		temp = new Item(kind, name, power, price);
+		this.itemList.add(temp);
 	}
 
 	public void shopMng() {
@@ -137,17 +137,17 @@ public class Shop {
 				if (selNum == 0)
 					break;
 				int count = 0;
-				for (int i = 0; i < itemList.size(); i++) {
-					if (itemList.get(i).kind == selKind) {
+				for (int i = 0; i < this.itemList.size(); i++) {
+					if (this.itemList.get(i).getKind() == selKind) {
 						count++;
 						if (count == selNum) {
-							if (Player.getMoney() >= itemList.get(i).price) {
+							if (Player.getMoney() >= this.itemList.get(i).getPrice()) {
 								Inventory invenTemp = Player.getInven();
-								invenTemp.addItem(itemList.get(i));
+								invenTemp.addItem(this.itemList.get(i));
 								Player.setInven(invenTemp);
-								int moneyTemp = Player.getMoney() - itemList.get(i).price;
+								int moneyTemp = Player.getMoney() - this.itemList.get(i).getPrice();
 								Player.setMoney(moneyTemp);
-								System.out.println("[" + itemList.get(i).name + "] 을 구입했습니다.");
+								System.out.println("[" + this.itemList.get(i).getName() + "] 을 구입했습니다.");
 								try {
 									Thread.sleep(1000);
 								} catch (InterruptedException e) {
@@ -166,24 +166,24 @@ public class Shop {
 
 	public void printItems(int kind) {
 		int count = 0;
-		for (int i = 0; i < itemList.size(); i++) {
-			if (itemList.get(i).kind != kind)
+		for (int i = 0; i < this.itemList.size(); i++) {
+			if (this.itemList.get(i).getKind() != kind)
 				continue;
 			System.out.print("[" + (count + 1) + "번]");
-			System.out.print("[이름 : " + itemList.get(i).name + "]");
-			System.out.print("[능력 : " + itemList.get(i).power + "]");
-			System.out.print("[가격 : " + itemList.get(i).price + "]");
+			System.out.print("[이름 : " + this.itemList.get(i).getName() + "]");
+			System.out.print("[능력 : " + this.itemList.get(i).getPower() + "]");
+			System.out.print("[가격 : " + this.itemList.get(i).getPrice() + "]");
 			System.out.println("");
 			count++;
 		}
 	}
 
-	public static ArrayList<Item> getItemList() {
-		return itemList;
+	public ArrayList<Item> getItemList() {
+		return (ArrayList<Item>) this.itemList.clone();
 	}
 
-	public static void setItemList(ArrayList<Item> itemList) {
-		Shop.itemList = itemList;
+	public void setItemList(ArrayList<Item> itemList) {
+		this.itemList = itemList;
 	}
 
 }

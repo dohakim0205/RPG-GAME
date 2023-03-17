@@ -56,7 +56,7 @@ public class Player {
 //		return index;
 //	}
 	
-	public static void addItemToItemList(Item item) {
+	public static void addItemToInventory(Item item) {
 		inven.addItem(item);
 	}
 	

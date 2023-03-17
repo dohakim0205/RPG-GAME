@@ -1,12 +1,25 @@
 package RPG_GAME;
 
 import java.io.IOException;
+import java.util.InputMismatchException;
 import java.util.Random;
 import java.util.Scanner;
 
 class MainGame {
-	static Scanner scan = new Scanner(System.in);
-	static Random ran = new Random();
+	public static Scanner scan = new Scanner(System.in);
+	public static Random ran = new Random();
+
+	public static int inputNumber() {
+		while (true) {
+			try {
+				int num = scan.nextInt();
+				return num;
+			} catch (InputMismatchException e) {
+				System.err.println("숫자만 입력할 수 있습니다");
+				scan.nextLine();
+			}
+		}
+	}
 
 	public MainGame() {
 		Player player = new Player();
