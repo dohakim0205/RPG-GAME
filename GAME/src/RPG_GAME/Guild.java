@@ -6,6 +6,8 @@ public class Guild {
 	private final int PARTY_MAX = 4;
 	private ArrayList<Unit> guildList = new ArrayList<>();
 	private Unit[] partyList;
+	private Unit guildMaster;
+	private RandomBuff guildBuff = new RandomBuff();
 
 	public void setGuild() {
 		Unit temp = new Unit("아무거나도하", 100, 100, 10, 5, 0);
@@ -31,6 +33,8 @@ public class Guild {
 				n += 1;
 			}
 		}
+
+		this.guildMaster = this.guildList.get(0);
 	}
 
 	public void addGuildList(Unit unit) {
@@ -70,6 +74,14 @@ public class Guild {
 
 	public int getPartyListSize() {
 		return this.partyList.length;
+	}
+	
+	public RandomBuff getGuildBuff() {
+		return guildBuff;
+	}
+
+	public void setGuildBuff(RandomBuff guildBuff) {
+		this.guildBuff = guildBuff;
 	}
 
 	public void setGuildList(ArrayList<Unit> guildList) {
@@ -132,20 +144,20 @@ public class Guild {
 		reqObj.setItem(weapon, armor, ring, hat, shoes);
 		return reqObj;
 	}
-	
+
 	public void setGuildUnitEquip(Unit unit, Item item) {
 		int index = indexOfUnit(unit);
 		this.guildList.get(index).setEquip(item);
 	}
-	
+
 	private int indexOfUnit(Unit unit) {
 		int index = -1;
-		for(Unit temp : this.guildList) {
-			if(temp.getName().equals(unit.getName())) {
+		for (Unit temp : this.guildList) {
+			if (temp.getName().equals(unit.getName())) {
 				index = this.guildList.indexOf(temp);
 			}
 		}
-		
+
 		return index;
 	}
 
@@ -316,11 +328,12 @@ public class Guild {
 			e.printStackTrace();
 		}
 	}
-
+	
 	public void guildMenu() {
 		while (true) {
 			System.out.println("=============== [길드관리] ================");
-			System.out.println("[1.길드목록] [2.길드원추가] [3.길드원삭제]\n" + "[4.파티원교체] [5.정렬] [6.파티원추가] [7.파티원삭제] [0.뒤로가기]");
+			System.out.println(
+					"[1.길드목록] [2.길드원추가] [3.길드원삭제] [4.길드마스터 변경] [5.정렬]\n" + "[6.파티원교체]  [7.파티원추가] [8.파티원삭제] [0.뒤로가기]");
 			int sel = MainGame.scan.nextInt();
 			if (sel == 1) {
 				printAllUnitStaus();
@@ -329,17 +342,39 @@ public class Guild {
 			} else if (sel == 3) {
 				removeUnit();
 			} else if (sel == 4) {
-				partyChange();
+				changeGuildMaster();
 			} else if (sel == 5) {
 				setArray();
 			} else if (sel == 6) {
-				addPartyUnit();
+				partyChange();
 			} else if (sel == 7) {
+				addPartyUnit();
+			} else if (sel == 8) {
 				deletePartyUnit();
 			} else if (sel == 0) {
 				break;
 			}
 		}
+	}
+
+	public void changeGuildMaster() {
+		System.out.println("[현재 길드마스터 : " + this.guildMaster.getName() + "]");
+		printAllUnitStaus();
+		System.out.println("길드마스터로 변경할 길드원을 선택해주세요");
+		int index = MainGame.inputNumber() - 1;
+		if (index < 0 || index >= this.guildList.size()) {
+			System.out.println("존재하지 않는 번호입니다");
+			return;
+		}
+
+		if (index == this.guildList.indexOf(this.guildMaster)) {
+			System.out.println("이미 길드마스터인 길드원입니다");
+			return;
+		}
+
+		this.guildMaster = this.guildList.get(index);
+		System.out.println("[변경된 길드마스터 : " + this.guildMaster.getName() + "]");
+
 	}
 
 	private void sortGuildList(String whatKindOf) {
@@ -449,6 +484,16 @@ public class Guild {
 		} catch (InterruptedException e) {
 			e.printStackTrace();
 		}
+	}
+	
+	public void guildBuffStatus() {
+		if(!this.guildBuff.isBuffStatus()) {
+			System.out.println("길드 버프를 생성합니다");
+			this.guildBuff.getGuildBuff();
+		}
+		
+		else
+			this.guildBuff.printGuildBuff();
 	}
 
 }

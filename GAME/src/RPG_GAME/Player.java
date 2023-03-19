@@ -6,6 +6,7 @@ public class Player {
 	private static int money;
 	public static Guild guild = new Guild();
 	public static Inventory inven = new Inventory();
+	public static RandomBuff zzac = new RandomBuff();
 
 	public Player() {
 		money = 100000;
@@ -34,6 +35,10 @@ public class Player {
 
 	public static void addUnitToGuildList(Unit unit) {
 		guild.addGuildList(unit);
+	}
+	
+	public void getGuildBuff() {
+		guild.guildBuffStatus();
 	}
 
 	static public ArrayList<Unit> getGuildList() {

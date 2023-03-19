@@ -164,10 +164,10 @@ public class Unit {
 	public void printStatus() {
 		System.out.print("[이름 : " + this.getName() + "]");
 		System.out.print(" [레벨 : " + this.level + "]");
-		System.out.print(" [체력 : " + this.hp + isItemNullForPower(this.ring));
-		System.out.println(" / " + this.maxHp + isItemNullForPower(this.ring) + "]");
-		System.out.print("[공격력 : " + this.att + isItemNullForPower(this.weapon) + isItemNullForPower(this.hat) + "]");
-		System.out.print(" [방어력 : " + this.def + isItemNullForPower(this.armor) + isItemNullForPower(this.shoes) + "]");
+		System.out.print(" [체력 : " + this.hp + isItemNullForPower(this.ring) + isGuildBuff("체력"));
+		System.out.println(" / " + this.maxHp + isItemNullForPower(this.ring) + isGuildBuff("체력") + "]");
+		System.out.print("[공격력 : " + this.att + isItemNullForPower(this.weapon) + isItemNullForPower(this.hat) + isGuildBuff("공격력") + "]");
+		System.out.print(" [방어력 : " + this.def + isItemNullForPower(this.armor) + isItemNullForPower(this.shoes) + isGuildBuff("방어력") + "]");
 		System.out.printf(" [파티중 : %s]\n", this.party ? "O" : "X");
 	}
 
@@ -178,6 +178,16 @@ public class Unit {
 		}
 
 		return power;
+	}
+	
+	private String isGuildBuff(String kind) {
+		RandomBuff buff = Player.guild.getGuildBuff();
+		if(buff.isBuffStatus() && buff.getBuffName().equals(kind)) {
+			return " + " + Player.guild.getGuildBuff().getPower() +"(길드 버프)";
+		}
+		
+		else
+			return "";
 	}
 
 	private String isItemNullForName(Item item) {
