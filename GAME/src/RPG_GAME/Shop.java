@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 public class Shop {
 	private ArrayList<Item> itemList = new ArrayList<>();
+	private Sauna sauna = new Sauna();
 
 	public Shop() {
 		int kind = Item.WEAPON;
@@ -115,7 +116,7 @@ public class Shop {
 	public void shopMng() {
 		while (true) {
 			System.out.println("=============== [상점] ===============");
-			System.out.println("[1.무기] [2.갑옷] [3.반지] [4.모자] [5.신발] [0.뒤로가기]");
+			System.out.println("[1.무기] [2.갑옷] [3.반지] [4.모자] [5.신발] [6.*1분사우나*] [0.뒤로가기]");
 			int selKind = MainGame.scan.nextInt();
 			if (selKind == 0)
 				return;
@@ -131,6 +132,8 @@ public class Shop {
 					System.out.println("=========== [모자] ============");
 				else if (selKind == Item.SHOES)
 					System.out.println("=========== [신발] ============");
+				else if(selKind == 6)
+					this.sauna.payfee();
 				printItems(selKind);
 				System.out.println("[골드 : " + Player.getMoney() + "]");
 				System.out.println("구입할 아이템 번호를 입력하세요 [0.뒤로가기]");
