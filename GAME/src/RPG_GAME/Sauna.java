@@ -60,13 +60,14 @@ public class Sauna {
 	private void cuteDog() {
 		this.ran = new Random();
 		String[] music = { "♪", "♬", "♩" };
-		int[] ranIdx = new int[6];
+		int[] ranIdx = new int[3];
 		String[] ranPrint = new String[8];
 		for (int i = 0; i < 8; i++) {
 			ranPrint[i] = " ";
-			for (int j = 0; j < 6; j++) {
-				ranIdx[j] = ran.nextInt(50);
+			for (int j = 0; j < 3; j++) {
+				ranIdx[j] = ran.nextInt(15);
 				ranPrint[i] += ranIdx[j] >= 3 ? " " : music[ranIdx[j]];
+				ranPrint[i] += " ";
 			}
 		}
 
